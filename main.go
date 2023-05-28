@@ -1,10 +1,3 @@
-// Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
-// License: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-// See page 19.
-//!+
-
-// Server1 is a minimal "echo" server.
 package main
 
 import (
@@ -22,8 +15,8 @@ import (
 var palette = []color.Color{color.White, color.Black}
 
 const (
-	whiteIndex = 0 // first color in palette
-	blackIndex = 1 // next color in palette
+	whiteIndex = 0
+	blackIndex = 1
 )
 
 func main() {
@@ -45,14 +38,14 @@ func main() {
 
 func lissajous(out io.Writer, cycles float64) {
 	const (
-		res     = 0.001 // angular resolution
-		size    = 100   // image canvas covers [-size..+size]
-		nframes = 64    // number of animation frames
-		delay   = 8     // delay between frames in 10ms units
+		res     = 0.001
+		size    = 100
+		nframes = 64
+		delay   = 8
 	)
-	freq := rand.Float64() * 3.0 // relative frequency of y oscillator
+	freq := rand.Float64() * 3.0
 	anim := gif.GIF{LoopCount: nframes}
-	phase := 0.0 // phase difference
+	phase := 0.0
 	for i := 0; i < nframes; i++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
@@ -66,5 +59,5 @@ func lissajous(out io.Writer, cycles float64) {
 		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
 	}
-	gif.EncodeAll(out, &anim) // NOTE: ignoring encoding errors
+	gif.EncodeAll(out, &anim)
 }
